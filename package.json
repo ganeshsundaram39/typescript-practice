@@ -1,0 +1,23 @@
+{
+  "name": "assignment7",
+  "version": "1.0.0",
+  "description": "assignment 7 by ganesh",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ganeshsundaram39/typescript-practice.git"
+  },
+  "author": "ganesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ganeshsundaram39/typescript-practice/issues"
+  },
+  "homepage": "https://github.com/ganeshsundaram39/typescript-practice#readme",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  }
+}
