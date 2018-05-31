@@ -2,22 +2,28 @@
 /// <reference path="youtube.ts"/>
 
 import YoutubeVideo = youtube.YoutubeVideo;
+import YoutubeAdvertisement = youtube.YoutubeAdvertisement;
 
-//https://www.youtube.com/watch?v=2i4JxWkSYzU
-const playYoutube=():void=>{
-    const youtubeVideo = new YoutubeVideo('2i4JxWkSYzU');
+const playYoutube=(id:string):void=>{
+
+    if(!id) return;
+
+    const youtubeVideo = new YoutubeVideo(id);
     youtubeVideo.getInformation();
+    console.log(youtubeVideo);
 
-    console.log(youtubeVideo.url);
-
-
-
-}
+    const youtubeAdvertisement=new YoutubeAdvertisement(id);
+    if(youtubeAdvertisement.isEligible(youtubeVideo._views)) {
+        YoutubeAdvertisement.showRandomAdvert();
+        console.log(youtubeAdvertisement);
+    }
+};
 
 const facebookProfile=():void=>{
 
-}
+};
 
 (()=>{
-    playYoutube();
+    //https://www.youtube.com/watch?v=2i4JxWkSYzU
+    playYoutube('2i4JxWkSYzU');
 })()
