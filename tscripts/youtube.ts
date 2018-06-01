@@ -4,6 +4,57 @@ namespace youtube {
         constructor(){}
     }
 
+    export class YoutubeUsers extends Youtube {
+        constructor(private userid:string){
+            super();
+        }
+
+        static detectUserLoggedIn(){
+            // logic
+            return true;
+        }
+
+        static setLoginInformation(){
+            console.log('saving user login information and sending to server');
+        }
+
+        static getLoginInformation(){
+            console.log('getting login information');
+            type user ={
+                username:string,
+                userId:string,
+                userHistory:{
+                    name:string,
+                    url:string,
+                    dateTime:string}[]
+                };
+
+            let userInfo:user;
+            // logic
+            userInfo={
+                username:"ganesh",
+                userId:"alsdkf2349",
+                userHistory:[{
+                                    name:"Everest mountain",
+                                    url:"https://www.everestmountain.com",
+                                    dateTime:"26 december 2018"
+                                    }]
+            };
+
+            return userInfo;
+        }
+
+        public userWantsToLogin(){
+            console.log('showing Login view');
+        }
+
+        public addToUserHistory(id:string){
+            console.log(`adding this video with id ${id} in user history of user id ${this.userid}`);
+        }
+
+
+    }
+
     export class YoutubeVideo extends Youtube {
         private _url: string = "";
         private _title: string = "";
@@ -16,6 +67,7 @@ namespace youtube {
         private _publisher:string="";
         private _isVerified:boolean|null=null;
         private _comments:{commenterName:string,commenterId:string,comment:string}[]|null=null;
+
 
         set url(value: string) {
             if (value) {
@@ -103,7 +155,9 @@ namespace youtube {
 
     class Report {
         protected type:string="";
+
         constructor(protected channelId:string){}
+
         public reportType(type:string){
             this.type=type;
         }
@@ -127,17 +181,15 @@ namespace youtube {
     export class AdBlocker extends Youtube{
         constructor(){
             super();
-
         }
 
         static detectAdBlocker():void{
-            console.log('Checking blocker');
+            console.log('Detecting Adblocker');
             if(true)this.blockAdblocker();
         }
 
         static blockAdblocker():void{
-            console.log('blocking');
+            console.log('Blocking Adblocker');
         }
-
     }
 }
