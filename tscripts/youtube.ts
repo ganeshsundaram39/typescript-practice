@@ -1,23 +1,29 @@
 namespace youtube {
+
+    // main parent
     class Youtube{
         protected totalUsers:number= 1300000000;
         constructor(){}
     }
 
+    //  this class represents youtube users
     export class YoutubeUsers extends Youtube {
         constructor(private userid:string){
             super();
         }
 
+        // check if they are logged in
         static detectUserLoggedIn(){
             // logic
             return true;
         }
 
+        // save login information
         static setLoginInformation(){
             console.log('saving user login information and sending to server');
         }
 
+        // get login information from local storage
         static getLoginInformation(){
             console.log('getting login information');
             type user ={
@@ -44,10 +50,12 @@ namespace youtube {
             return userInfo;
         }
 
+        // if user wants to login
         public userWantsToLogin(){
             console.log('showing Login view');
         }
 
+        // add video to user history
         public addToUserHistory(id:string){
             console.log(`adding this video with id ${id} in user history of user id ${this.userid}`);
         }
@@ -55,6 +63,7 @@ namespace youtube {
 
     }
 
+    // this class represents youtube video
     export class YoutubeVideo extends Youtube {
         private _url: string = "";
         private _title: string = "";
@@ -109,6 +118,7 @@ namespace youtube {
             return "556";
         }
 
+        // get all the information
         public getInformation(): void {
             console.log("obtain video information");
 
@@ -131,7 +141,7 @@ namespace youtube {
     }
 
 
-
+    // this class represents monetization of video
     class YoutubeMonetize extends Youtube {
         protected isMonetized: boolean = true;
         constructor(private id: string) {
@@ -139,6 +149,7 @@ namespace youtube {
         }
     }
 
+    // this class represent advertisement
     export class YoutubeAdvertisement extends YoutubeMonetize {
         constructor(id: string) {
             super(id);
@@ -153,6 +164,8 @@ namespace youtube {
         }
     }
 
+
+    // this class represent  methods to deal with problematic videos
     class Report {
         protected type:string="";
 
@@ -178,6 +191,8 @@ namespace youtube {
         }
     }
 
+
+    // blocking ad blocker
     export class AdBlocker extends Youtube{
         constructor(){
             super();
@@ -190,6 +205,10 @@ namespace youtube {
 
         static blockAdblocker():void{
             console.log('Blocking Adblocker');
+        }
+
+        static sendReport():void{
+            console.log('sending information about ad blocker to the server');
         }
     }
 }

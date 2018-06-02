@@ -1,10 +1,13 @@
 namespace facebook {
+
+    // this class represent main facebook object
     class Facebook {
         private totalUsers: number = 2190000000;
         constructor() {}
     }
 
-    class Advertisement extends Facebook{
+    //  this class represent advertisement object
+    export class Advertisement extends Facebook{
         constructor(){
             super();
         }
@@ -14,7 +17,9 @@ namespace facebook {
         }
     }
 
-    class Games  extends Facebook{
+
+    // this class represents facebook games
+    export class Games  extends Facebook{
          constructor(){
              super();
          }
@@ -24,10 +29,30 @@ namespace facebook {
          }
 
          protected gameNotification(){
-
+            console.log('show game notifications');
          }
     }
 
+
+    // this class represents news section
+    export class News extends Facebook{
+        private news:{newsSource:string,newsDescription:string,newsLink:string}[]=[];
+
+        constructor(){
+            super();
+        }
+
+        static getNews(){
+            console.log('fetch news using api');
+        }
+
+        static showNews(){
+            console.log('showing news post');
+        }
+    }
+
+
+    // this class represents users personal info
     class PersonalInfo extends Facebook {
         protected firstName: string = "";
         protected lastName: string = "";
@@ -88,7 +113,7 @@ namespace facebook {
 
         }
 
-        private getAge ():number|null{
+        public getAge ():number|null{
             if(this.birthday.yearOfBirth)
             return new Date().getFullYear()-this.birthday.yearOfBirth;
 
@@ -96,7 +121,9 @@ namespace facebook {
         }
     }
 
-    class UserAllPost extends PersonalInfo{
+
+    // this class represents users posts
+    class UserPost extends PersonalInfo{
         protected posts:{postid:string,post:string}[]=[]
         constructor(protected fbId:string){
             super(fbId);
@@ -107,22 +134,41 @@ namespace facebook {
         }
 
         protected insertPost(){
+            this.getPosts();
             console.log('insert post along with advertisements');
             Advertisement.randomAdvertPost();
         }
+
+        protected createNewPost(){
+            console.log('creating new post');
+        }
     }
 
-    class getFriends extends UserAllPost{
+
+    class Friends extends UserPost{
         constructor(protected fbId:string){
             super(fbId);
         }
 
-        protected getAllFriendsList(){
-            // get all the freidns
+        protected getAllFriendsList():{[multiple:string]:any}[]{
+            // get all the friends
+            console.log('get all friends');
+            return [{
+
+            }];
+        }
+
+        protected getBlockedList():{name:string,id:string}[]{
+            console.log('get all blocked friends');
+            return [{
+                name:"manish",
+                id:"lskf87623"
+            }]
         }
     }
 
-    export class FacebookProfile extends getFriends {
+    // this class represents all its ancestors
+    export class FacebookProfile extends Friends {
         constructor(protected fbId: string) {
             super(fbId);
         }
@@ -130,7 +176,7 @@ namespace facebook {
         getInformation() {
             console.log("Getting information");
             this.getPersonalInfo();
-            this.getPosts();
+            this.insertPost();
             this.getAllFriendsList();
         }
     }
